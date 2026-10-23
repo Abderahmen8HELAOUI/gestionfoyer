@@ -1,4 +1,7 @@
 package tn.esprim.gestionfoyer.repositories;
 
-public interface EtudiantRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.esprim.gestionfoyer.entities.Etudiant;
+
+public interface EtudiantRepository extends JpaRepository<Etudiant,Long> {
 }
