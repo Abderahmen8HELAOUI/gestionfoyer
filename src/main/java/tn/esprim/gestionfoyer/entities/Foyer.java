@@ -1,6 +1,8 @@
 package tn.esprim.gestionfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,4 +35,9 @@ public class Foyer implements Serializable {
     @OneToMany(mappedBy = "foyer", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("foyer")
     private Set<Bloc> blocs;
+
+    @JsonCreator
+    public Foyer(@JsonProperty("idFoyer") Long idFoyer) {
+        this.idFoyer = idFoyer;
+    }
 }

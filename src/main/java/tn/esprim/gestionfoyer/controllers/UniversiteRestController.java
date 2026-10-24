@@ -1,6 +1,7 @@
 package tn.esprim.gestionfoyer.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprim.gestionfoyer.entities.Universite;
 import tn.esprim.gestionfoyer.service.IUniversiteService;
@@ -29,8 +30,12 @@ public class UniversiteRestController {
     }
 
     @DeleteMapping("/remove-universite/{universite-id}")
-    public void removeUniversite(@PathVariable("universite-id") Long uId) {
+    public ResponseEntity<String> removeUniversite(@PathVariable("universite-id") Long uId) {
+        // Appel du service qui ne renvoie rien
         universiteService.removeUniversite(uId);
+
+        // C'est le contrôleur qui construit la réponse HTTP
+        return ResponseEntity.ok("L'université avec l'id " + uId + " a été supprimée avec succès !");
     }
 
     @PutMapping("/modify-universite")

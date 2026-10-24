@@ -1,5 +1,7 @@
 package tn.esprim.gestionfoyer.entities;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,4 +26,9 @@ public class Universite implements Serializable {
     @OneToOne(mappedBy = "universite")
     @JsonIgnoreProperties("universite") // <-- Coupe la boucle JSON
     private Foyer foyer;
+
+    @JsonCreator
+    public Universite(@JsonProperty("idUniversite") Long idUniversite) {
+        this.idUniversite = idUniversite;
+    }
 }

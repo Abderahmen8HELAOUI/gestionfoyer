@@ -45,6 +45,7 @@ public class ChambreRestController {
     @PutMapping("/modify-chambre")
     public Chambre modifyChambre(@RequestBody Chambre c)
     {
-        Chambre chambre = chambreService.modifyChambre(c); return chambre;
+        Chambre chambre = chambreService.modifyChambre(c);
+        return chambre;
     }
 }
