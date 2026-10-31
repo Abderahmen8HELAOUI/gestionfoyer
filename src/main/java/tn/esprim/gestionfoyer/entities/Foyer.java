@@ -26,7 +26,7 @@ public class Foyer implements Serializable {
     private Long capaciteFoyer;
 
     // Foyer est le fils (détient la FK id_universite)
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_universite")
     @JsonIgnoreProperties("foyer")
     private Universite universite;

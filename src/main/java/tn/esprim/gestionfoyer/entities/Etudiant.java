@@ -37,4 +37,10 @@ public class Etudiant implements Serializable {
     )
     @JsonIgnoreProperties("etudiants")
     private Set<Reservation> reservations;
+
+    // Dans Etudiant.java
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.getEtudiants().add(this);
+    }
 }

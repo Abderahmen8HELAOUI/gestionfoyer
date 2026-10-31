@@ -3,8 +3,10 @@ package tn.esprim.gestionfoyer.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprim.gestionfoyer.entities.Foyer;
+import tn.esprim.gestionfoyer.entities.Universite;
 import tn.esprim.gestionfoyer.exception.ResourceNotFoundException;
 import tn.esprim.gestionfoyer.repositories.FoyerRepository;
+import tn.esprim.gestionfoyer.repositories.UniversiteRepository;
 import tn.esprim.gestionfoyer.service.IFoyerService;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 public class FoyerServiceImpl implements IFoyerService {
 
     private final FoyerRepository foyerRepository;
+    private final UniversiteRepository universiteRepository;
 
     @Override
     public List<Foyer> retrieveAllFoyers() {
@@ -28,6 +31,16 @@ public class FoyerServiceImpl implements IFoyerService {
 
     @Override
     public Foyer addFoyer(Foyer f) {
+
+        Long idUniversite = f.getUniversite().getIdUniversite();
+
+        // 2. On va chercher la vraie université en base (qui contient l'adresse et le nom)
+        Universite vraieUniversite = universiteRepository.findById(idUniversite)
+                .orElseThrow(() -> new RuntimeException("Université introuvable avec l'id : " + idUniversite));
+
+        // 3. On remplace le "faux" objet (qui n'avait que l'ID) par le vrai
+        f.setUniversite(vraieUniversite);
+
         return foyerRepository.save(f);
     }
 

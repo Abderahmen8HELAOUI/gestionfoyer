@@ -13,4 +13,5 @@ public interface IReservationService {
     public Reservation addReservation(Reservation reservation);
     public void removeReservation(UUID reservationId);
     public Reservation modifyReservation(Reservation reservation);
+    public  Reservation assignerEtudiant(UUID idReservation, Long idEtudiant);
 }

@@ -1,8 +1,11 @@
 package tn.esprim.gestionfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,9 +23,11 @@ public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID) // <-- Génération auto
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID idReservation;
 
-    @Temporal(TemporalType.DATE)
+    // Approche moins idéale pour une période
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date anneeUniversitaire;
 
     private boolean estValide;

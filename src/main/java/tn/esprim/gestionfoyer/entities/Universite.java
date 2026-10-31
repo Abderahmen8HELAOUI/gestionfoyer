@@ -27,7 +27,7 @@ public class Universite implements Serializable {
     @JsonIgnoreProperties("universite") // <-- Coupe la boucle JSON
     private Foyer foyer;
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public Universite(@JsonProperty("idUniversite") Long idUniversite) {
         this.idUniversite = idUniversite;
     }

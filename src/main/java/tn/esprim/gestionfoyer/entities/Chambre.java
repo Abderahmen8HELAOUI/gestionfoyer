@@ -28,7 +28,7 @@ public class Chambre implements Serializable {
 
     // Relation *-1 avec Bloc
     // Dans l'entité Chambre
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_bloc")
     @JsonIgnoreProperties("chambres") // <-- Coupe la boucle côté Chambre
     private Bloc bloc;
